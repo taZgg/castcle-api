@@ -35,6 +35,32 @@ const db_uri = `mongodb+srv://${db_user_pass}${process.env.DB_HOST}`
 
 const client = new MongoClient(db_uri);
 
+async function processContent(contentDocument){
+  console.log(contentDocument._id)
+  //remove feed
+  let deleteFeedQuery = {};
+  deleteFeedQuery['content'] = {id:contentDocument._id};
+  console.log('delete feeditems')
+   
+  console.log('delete guestfeeditems')
+  let deleteGuestFeedQuery = {content: contentDocument._id};
+   
+  console.log('delete contentinfo')
+  let deleteContentInfo = {contentId: contentDocument._id};
+   
+  console.log('delete dscontentreaches')
+  let deleteDs = {content: contentDocument._id};
+   
+  console.log('delete content itself') 
+  await Promise.all([ client.db(process.env.DB_DATABASE_NAME).collection('feeditems').deleteMany(deleteFeedQuery),
+     client.db(process.env.DB_DATABASE_NAME).collection('guestfeeditems').deleteMany(deleteGuestFeedQuery),
+     client.db(process.env.DB_DATABASE_NAME).collection('contentinfo').deleteMany(deleteContentInfo)
+    ,client.db(process.env.DB_DATABASE_NAME).collection('dscontentreaches').deleteMany(deleteDs)
+    , client.db(process.env.DB_DATABASE_NAME).collection('contents').deleteOne({_id:contentDocument._id})
+  ])
+  console.log('done');
+}
+
 async function init(){
   console.log('connecting ', db_uri);
   await client.connect();
@@ -49,10 +75,11 @@ async function init(){
   }else{
     console.log('count', (await cursor.count())) 
   }
-  
-  const contentIds= await cursor.map(doc => doc._id);
-  
-
+  let i = 0;
+  cursor.forEach(doc => {
+      console.log('test delete', doc._id, i++);
+      processContent(doc);
+  });
 }
 
 init();
