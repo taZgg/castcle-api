@@ -75,9 +75,6 @@ export class UserResponseDto {
   castcleId: string;
 
   @ApiProperty()
-  type: string;
-
-  @ApiProperty()
   displayName: string;
 
   @ApiProperty()
