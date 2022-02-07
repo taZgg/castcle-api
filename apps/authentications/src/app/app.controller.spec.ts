@@ -566,9 +566,9 @@ describe('AppController', () => {
     });
 
     it('should get Exception when wrong email', async () => {
-      const language = 'en';
+      const language = 'th';
       const guestResult = await appController.guestLogin(
-        { $device: 'iphone', $language: 'en', $platform: 'iOs' } as any,
+        { $device: 'iphone', $language: 'th', $platform: 'iOs' } as any,
         { deviceUUID: deviceUUID }
       );
       const credentialGuest = await service.getCredentialFromAccessToken(
@@ -592,9 +592,9 @@ describe('AppController', () => {
     });
 
     it('should get Exception when wrong password', async () => {
-      const language = 'en';
+      const language = 'th';
       const guestResult = await appController.guestLogin(
-        { $device: 'iphone', $language: 'en', $platform: 'iOs' } as any,
+        { $device: 'iphone', $language: 'th', $platform: 'iOs' } as any,
         { deviceUUID: deviceUUID }
       );
       const credentialGuest = await service.getCredentialFromAccessToken(

@@ -36,9 +36,6 @@ import { DEFAULT_QUERY_OPTIONS } from './common.dto';
 
 export enum UserField {
   Relationships = 'relationships',
-  LinkSocial = 'link-social',
-  SyncSocial = 'sync-social',
-  Wallet = 'wallet',
 }
 
 export enum ExcludeFeedField {
