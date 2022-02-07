@@ -195,10 +195,15 @@ export class AuthenticationController {
 
         return result;
       } else
-        throw new CastcleException(CastcleStatus.INVALID_EMAIL_OR_PASSWORD);
+        throw new CastcleException(
+          CastcleStatus.INVALID_EMAIL_OR_PASSWORD,
+          req.$language
+        );
     } catch (error) {
-      this.logger.error('Login error', error.stack);
-      throw new CastcleException(CastcleStatus.INVALID_EMAIL_OR_PASSWORD);
+      throw new CastcleException(
+        CastcleStatus.INVALID_EMAIL_OR_PASSWORD,
+        req.$language
+      );
     }
   }
 
