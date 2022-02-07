@@ -40,7 +40,6 @@ import {
   ShortPayload,
   SocialSyncDto,
   UpdateUserDto,
-  UserField,
   UserResponseDto,
 } from '@castcle-api/database/dtos';
 import { generateMockUsers, MockUserDetail } from '@castcle-api/database/mocks';
@@ -153,29 +152,7 @@ describe('AppController', () => {
       expect(response).toBeDefined();
       expect(response.castcleId).toEqual(user.displayId);
       expect(response.email).toEqual(userAccount.email);
-      expect(response.passwordNotSet).toBeDefined();
-      expect(response.linkSocial).toBeUndefined();
-      expect(response.syncSocial).toBeUndefined();
-    });
-
-    it('should return UserResponseDto of current credential with userFileds', async () => {
-      const response = await appController.getMyData(
-        {
-          $credential: userCredential,
-          $language: 'th',
-        } as any,
-        {
-          userFields: [UserField.LinkSocial, UserField.SyncSocial],
-          hasRelationshipExpansion: false,
-        }
-      );
-      const user = await service.getUserFromCredential(userCredential);
-      expect(response).toBeDefined();
-      expect(response.castcleId).toEqual(user.displayId);
-      expect(response.email).toEqual(userAccount.email);
-      expect(response.passwordNotSet).toBeDefined();
-      expect(response.linkSocial).toBeDefined();
-      expect(response.syncSocial).toBeDefined();
+      //appController.getMyData()
     });
   });
 

@@ -220,6 +220,7 @@ export class UserController {
     @Req() req: CredentialRequest,
     @Query() userQuery?: ExpansionQuery
   ) {
+    //UserService
     const user = await this.userService.getUserFromCredential(req.$credential);
     if (!user) throw new CastcleException(CastcleStatus.INVALID_ACCESS_TOKEN);
 
