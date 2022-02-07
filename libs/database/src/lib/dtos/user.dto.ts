@@ -285,6 +285,9 @@ export class FollowResponse {
   pagination: Pagination;
 }
 
+export class SocialSyncPageRequestDto {
+  payload: SocialSyncDto[];
+}
 export class SocialSyncDto {
   @ApiProperty()
   @IsString()
